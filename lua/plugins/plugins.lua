@@ -1,6 +1,7 @@
 
 
 return {
+    { "neovim/nvim-lspconfig" }, 
 	{ "folke/which-key.nvim" },
 	{ "sharkdp/fd" },
 	{

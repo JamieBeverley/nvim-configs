@@ -19,5 +19,19 @@ return {
 	"nvim-telescope/telescope.nvim",
 	tag = '0.1.8',
 	dependencies = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter', 'sharkdp/fd' }
+},
+{
+    "nvim-tree/nvim-tree.lua",
+    lazy = false,
+    config = function()
+        require("nvim-tree").setup{
+            renderer = { icons = { show = { file = false, folder = false } } }
+        }
+        vim.api.nvim_create_autocmd({ "VimEnter" }, {
+            callback = function()
+                require("nvim-tree.api").tree.open()
+            end
+        })
+    end,
 }
 }

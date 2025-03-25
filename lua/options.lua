@@ -7,3 +7,7 @@ vim.o.termguicolors = true
 vim.cmd('syntax enable')
 vim.cmd('filetype plugin indent on')
 
+
+-- advised for nvim-tree
+vim.g.loaded_netrw = 1
+

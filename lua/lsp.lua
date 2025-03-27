@@ -7,3 +7,5 @@ lspconfig.basedpyright.setup {
     }
 }
 
+lspconfig.ts_ls.setup{
+}

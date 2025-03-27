@@ -11,3 +11,10 @@ vim.cmd('filetype plugin indent on')
 -- advised for nvim-tree
 vim.g.loaded_netrw = 1
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function()
+        vim.lsp.buf.format()
+    end,
+})
+

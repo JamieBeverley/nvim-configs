@@ -9,3 +9,7 @@ lspconfig.basedpyright.setup {
 
 lspconfig.ts_ls.setup{
 }
+lspconfig.hls.setup{
+      filetypes = { 'haskell', 'lhaskell', 'cabal' }
+}
+

@@ -1,6 +1,12 @@
 
 
 return {
+    {
+        "klen/nvim-config-local",
+        opts = {
+            config_files = { ".nvim.lua"}
+        }
+    },
     { "nvimtools/none-ls.nvim", 
       dependencies = { "nvim-lua/plenary.nvim" }
     },

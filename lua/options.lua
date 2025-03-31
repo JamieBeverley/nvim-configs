@@ -13,3 +13,12 @@ vim.g.loaded_netrw = 1
 
 -- all yank/delete/put commands to use clipboard
 vim.cmd('set clipboard=unnamedplus')
+
+-- auto-format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function()
+        vim.lsp.buf.format()
+    end,
+})
+

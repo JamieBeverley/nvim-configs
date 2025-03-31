@@ -11,3 +11,5 @@ vim.cmd('filetype plugin indent on')
 -- advised for nvim-tree
 vim.g.loaded_netrw = 1
 
+-- all yank/delete/put commands to use clipboard
+vim.cmd('set clipboard=unnamedplus')

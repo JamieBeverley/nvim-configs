@@ -19,4 +19,35 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 -- for some reason TermEnter doesn't seem to work
 vim.cmd("autocmd BufWinEnter,WinEnter term://* startinsert")
 
+local last_non_terminal_buf = nil
+local last_terminal_buf = nil
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function()
+        local buftype = vim.bo.buftype
+        if buftype ~= "terminal" then
+            last_non_terminal_buf = vim.fn.bufnr()
+            print("terminal buf set to " .. vim.fn.bufnr())
+        else
+            last_terminal_buf = vim.fn.bufnr()
+            print("non-term buf set to " .. vim.fn.bufnr())
+        end
+    end,
+})
+
+function SwitchToLastNonTerminalBuffer()
+    print("switch to buffer: " .. last_non_terminal_buf)
+    if last_non_terminal_buf then
+        vim.cmd("buffer " .. last_non_terminal_buf)
+    end
+end
+function SwitchToLastTerminal()
+    print("switch to term: " .. last_terminal_buf)
+    if last_terminal_buf then
+        vim.cmd("buffer " .. last_terminal_buf)
+    end
+end
+
+
+vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-B>', SwitchToLastNonTerminalBuffer, { noremap = true, silent = false })
+vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-T>', SwitchToLastTerminal, { noremap = true, silent = false })
 

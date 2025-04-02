@@ -22,6 +22,3 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
--- color
-vim.cmd("colorscheme vim")
-

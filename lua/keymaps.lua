@@ -22,6 +22,14 @@ end
 
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
+-- Hack so terminal renders 'right' of tree... probably doesn't belong here...
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+    callback = function()
+        local Terminal  = require('toggleterm.terminal').Terminal
+        local terminal = Terminal:new()
+    end
+})
+
 
 -- remapped from <C-L> so that can us <C-h/j/k/l> to move windows without going into window mode...
 vim.keymap.set('n', '<C-R>', '<Cmd>nohlsearch|diffupdate|normal! <C-L><CR>', { noremap = true, silent = true })

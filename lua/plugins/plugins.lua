@@ -12,6 +12,12 @@ return {
             terminal_mappings = true,
             persist_mode = true,
             persist_size = true,
+        },
+    },
+    {
+        "klen/nvim-config-local",
+        opts = {
+            config_files = { ".nvim.lua"}
         }
     },
     { "nvimtools/none-ls.nvim", 

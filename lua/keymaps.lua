@@ -4,6 +4,10 @@ vim.keymap.set('n', '<leader>fg', telescope_builtin.live_grep, { desc = 'Telesco
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
 
+vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-P>', telescope_builtin.find_files, { noremap = true, silent = false })
+vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
+
+
 function _G.set_terminal_keymaps()
     local opts = {buffer = 0}
     vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts) vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts) vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
@@ -25,9 +29,6 @@ vim.keymap.set({ 'i', 'n' }, '<C-H>', [[<C-W><C-H>]], { noremap = true, silent =
 vim.keymap.set({ 'i', 'n' }, '<C-J>', [[<C-W><C-J>]], { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-K>', [[<C-W><C-K>]], { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-L>', [[<C-W><C-L>]], { noremap = true, silent = true })
-
-
-
 -- Disabled for now -> possibly use in place of toggleterm
 -- function _G.set_terminal_keymaps()
 --     local opts = {buffer = 0}

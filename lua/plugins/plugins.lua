@@ -1,6 +1,20 @@
 
 
 return {
+  --   { "akinsho/toggleterm.nvim",
+  --     version = "*",
+  --     config = true,
+  --     opts = {
+  --         direction = "horizontal",
+  --         start_in_insert = false,
+  --         open_mapping = [[<C-\>]],
+  --         -- terminal_mappings = true,
+  --         -- persist_mode = true,
+  --         -- persist_size = true,
+  --         -- hidden = true,
+  --         -- size = 15,
+  --     }
+  -- },
     { "nvimtools/none-ls.nvim", 
       dependencies = { "nvim-lua/plenary.nvim" }
     },

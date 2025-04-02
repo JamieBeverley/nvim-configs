@@ -6,9 +6,7 @@ vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telesco
 
 function _G.set_terminal_keymaps()
     local opts = {buffer = 0}
-    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
-    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+    vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts) vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts) vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
     vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
     vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
     vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
@@ -21,9 +19,12 @@ end
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
 
-
-
-
+-- remapped from <C-L> so that can us <C-h/j/k/l> to move windows without going into window mode...
+vim.keymap.set('n', '<C-R>', '<Cmd>nohlsearch|diffupdate|normal! <C-L><CR>', { noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-H>', [[<C-W><C-H>]], { noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-J>', [[<C-W><C-J>]], { noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-K>', [[<C-W><C-K>]], { noremap = true, silent = true })
+vim.keymap.set({ 'i', 'n' }, '<C-L>', [[<C-W><C-L>]], { noremap = true, silent = true })
 
 
 
@@ -50,15 +51,7 @@ vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 --         local buftype = vim.bo.buftype
 --         if buftype ~= "terminal" then
 --             last_non_terminal_buf = vim.fn.bufnr()
---             print("terminal buf set to " .. vim.fn.bufnr())
---         else
---             last_terminal_buf = vim.fn.bufnr()
---             print("non-term buf set to " .. vim.fn.bufnr())
---         end
---     end,
--- })
--- 
--- function SwitchToLastNonTerminalBuffer()
+--             print("terminal buf set to " .. vim.fn.bufnr()) else last_terminal_buf = vim.fn.bufnr() print("non-term buf set to " .. vim.fn.bufnr()) end end, }) function SwitchToLastNonTerminalBuffer()
 --     print("switch to buffer: " .. last_non_terminal_buf)
 --     if last_non_terminal_buf then
 --         vim.cmd("buffer " .. last_non_terminal_buf)

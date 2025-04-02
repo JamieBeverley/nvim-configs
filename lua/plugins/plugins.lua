@@ -7,6 +7,7 @@ return {
         config = true,
         opts = {
             direction = "horizontal",
+            size = 20,
             open_mapping = [[<C-\>]],
             start_in_insert = true,
             terminal_mappings = true,

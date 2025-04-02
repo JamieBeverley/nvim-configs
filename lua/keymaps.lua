@@ -6,48 +6,72 @@ vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telesco
 
 function _G.set_terminal_keymaps()
     local opts = {buffer = 0}
-    -- esc key to enter normal mode
     vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+    vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+    vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+    vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+    vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+    -- go to insert mode by default
+    -- vim.api.nvim_input('i')
     -- ctrl + W to enter window mode (skip the ctrl \ + ctrl n)
     vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-W>]], { noremap=true, silent=true })
-    -- go to insert mode by default
-    vim.api.nvim_input('i')
 end
+
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
--- auto-set to insert mode when switching to a terminal buffer
--- for some reason TermEnter doesn't seem to work
-vim.cmd("autocmd BufWinEnter,WinEnter term://* startinsert")
-
-local last_non_terminal_buf = nil
-local last_terminal_buf = nil
-vim.api.nvim_create_autocmd("BufEnter", {
-    callback = function()
-        local buftype = vim.bo.buftype
-        if buftype ~= "terminal" then
-            last_non_terminal_buf = vim.fn.bufnr()
-            print("terminal buf set to " .. vim.fn.bufnr())
-        else
-            last_terminal_buf = vim.fn.bufnr()
-            print("non-term buf set to " .. vim.fn.bufnr())
-        end
-    end,
-})
-
-function SwitchToLastNonTerminalBuffer()
-    print("switch to buffer: " .. last_non_terminal_buf)
-    if last_non_terminal_buf then
-        vim.cmd("buffer " .. last_non_terminal_buf)
-    end
-end
-function SwitchToLastTerminal()
-    print("switch to term: " .. last_terminal_buf)
-    if last_terminal_buf then
-        vim.cmd("buffer " .. last_terminal_buf)
-    end
-end
 
 
-vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-B>', SwitchToLastNonTerminalBuffer, { noremap = true, silent = false })
-vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-T>', SwitchToLastTerminal, { noremap = true, silent = false })
 
+
+
+
+
+-- Disabled for now -> possibly use in place of toggleterm
+-- function _G.set_terminal_keymaps()
+--     local opts = {buffer = 0}
+--     -- esc key to enter normal mode
+--     vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+--     -- ctrl + W to enter window mode (skip the ctrl \ + ctrl n)
+--     vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-W>]], { noremap=true, silent=true })
+--     -- go to insert mode by default
+--     vim.api.nvim_input('i')
+-- end
+-- vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
+-- 
+-- -- auto-set to insert mode when switching to a terminal buffer
+-- -- for some reason TermEnter doesn't seem to work
+-- vim.cmd("autocmd BufWinEnter,WinEnter term://* startinsert")
+-- 
+-- local last_non_terminal_buf = nil
+-- local last_terminal_buf = nil
+-- vim.api.nvim_create_autocmd("BufEnter", {
+--     callback = function()
+--         local buftype = vim.bo.buftype
+--         if buftype ~= "terminal" then
+--             last_non_terminal_buf = vim.fn.bufnr()
+--             print("terminal buf set to " .. vim.fn.bufnr())
+--         else
+--             last_terminal_buf = vim.fn.bufnr()
+--             print("non-term buf set to " .. vim.fn.bufnr())
+--         end
+--     end,
+-- })
+-- 
+-- function SwitchToLastNonTerminalBuffer()
+--     print("switch to buffer: " .. last_non_terminal_buf)
+--     if last_non_terminal_buf then
+--         vim.cmd("buffer " .. last_non_terminal_buf)
+--     end
+-- end
+-- function SwitchToLastTerminal()
+--     print("switch to term: " .. last_terminal_buf)
+--     if last_terminal_buf then
+--         vim.cmd("buffer " .. last_terminal_buf)
+--     end
+-- end
+-- 
+-- 
+-- vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-B>', SwitchToLastNonTerminalBuffer, { noremap = true, silent = false })
+-- vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-T>', SwitchToLastTerminal, { noremap = true, silent = false })
+-- 

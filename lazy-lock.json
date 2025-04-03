@@ -1,4 +1,5 @@
 {
+  "black": { "branch": "stable", "commit": "8a737e727ac5ab2f1d4cf5876720ed276dc8dc4b" },
   "fd": { "branch": "master", "commit": "045fd2d68984720c8a55f424db96d1c4861935d8" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "none-ls.nvim": { "branch": "main", "commit": "a117163db44c256d53c3be8717f3e1a2a28e6299" },

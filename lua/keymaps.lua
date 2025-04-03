@@ -29,7 +29,17 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
         local terminal = Terminal:new()
     end
 })
+--
+-- Set a keymap with an anonymous function (lambda function)
+vim.keymap.set('n', '<leader>h', function() print("Hello from the anonymous function!") end)
 
+-- Black formatter
+--vim.api.nvim_set_keymappp('n', '<Leader>fmt', ':!black %<CR>', { noremap = true, silent = true })
+vim.api.nvim_('n', '<Leader>fmt', ':!black %<CR>', { noremap = true, silent = true })
+vim.api.nvim_('n', '<Leader>fmt', ':!black %<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>fmt', function()
+    vim.lsp.buf.format()
+end, { noremap = true, silent = true })
 
 -- remapped from <C-L> so that can us <C-h/j/k/l> to move windows without going into window mode...
 -- vim.keymap.set('n', '<C-R>', '<Cmd>nohlsearch|diffupdate|normal! <C-L><CR>', { noremap = true, silent = true })

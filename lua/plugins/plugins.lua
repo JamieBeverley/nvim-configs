@@ -1,6 +1,7 @@
 
 
 return {
+    { "psf/black", branch="stable" },
     {
         "akinsho/toggleterm.nvim",
         version = "*",

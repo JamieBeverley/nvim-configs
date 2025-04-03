@@ -32,7 +32,7 @@ vim.api.nvim_create_autocmd({ "VimEnter" }, {
 
 
 -- remapped from <C-L> so that can us <C-h/j/k/l> to move windows without going into window mode...
-vim.keymap.set('n', '<C-R>', '<Cmd>nohlsearch|diffupdate|normal! <C-L><CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<C-R>', '<Cmd>nohlsearch|diffupdate|normal! <C-L><CR>', { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-H>', [[<C-W><C-H>]], { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-J>', [[<C-W><C-J>]], { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-K>', [[<C-W><C-K>]], { noremap = true, silent = true })

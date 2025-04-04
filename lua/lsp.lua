@@ -11,7 +11,6 @@ null_ls.setup({
 -- LSP
 local lspconfig = require('lspconfig')
 lspconfig.basedpyright.setup {
---    cmd = { "python" , "-m" , "basedpyright" },
       settings = {
          basedpyright = {
  

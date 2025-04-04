@@ -1,4 +1,4 @@
-pip install basedpyright black
+pip install basedpyright black isort
 
 npm install -g typescript typescript-language-server
 

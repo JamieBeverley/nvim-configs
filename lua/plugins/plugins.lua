@@ -102,12 +102,14 @@ return {
             tag = '0.1.8',
             dependencies = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter', 'sharkdp/fd' }
         },
+        { "nvim-tree/nvim-web-devicons", opts = {}},
         {
             "nvim-tree/nvim-tree.lua",
             lazy = false,
             config = function()
                 require("nvim-tree").setup{
-                    renderer = { icons = { show = { file = false, folder = false } } }
+                    -- renderer = { icons = { show = { file = false, folder = false } } },
+                    git = { ignore = false }
                 }
                 vim.api.nvim_create_autocmd({ "VimEnter" }, {
                     callback = function()

@@ -8,6 +8,9 @@ vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-P>', telescope_builtin.find_files,
 vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
 
 
+-- Show lsp error info
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show diagnostic at cursor" })
+
 function _G.set_terminal_keymaps()
     local opts = {buffer = 0}
     vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts) vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts) vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)

@@ -8,6 +8,9 @@ vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-P>', telescope_builtin.find_files,
 vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
 
 
+-- rename
+vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { noremap = true, silent = false })
+
 -- Show lsp error info
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show diagnostic at cursor" })
 

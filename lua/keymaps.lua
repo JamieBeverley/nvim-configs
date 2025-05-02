@@ -8,11 +8,11 @@ vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-P>', telescope_builtin.find_files,
 vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
 
 
--- rename
-vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { noremap = true, silent = false })
-
--- Show lsp error info
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Show diagnostic at cursor" })
+-- LSP commands feedback
+vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = "Show diagnostic at cursor" })
+vim.keymap.set('n', '<leader>lh', vim.lsp.buf.hover, { desc = "LSP hover to show types etc..." })
+vim.keymap.set('n', '<leader>lrf', vim.lsp.buf.references, { desc = "Show references" })
+vim.keymap.set('n', '<leader>lrn', vim.lsp.buf.rename, { desc = "Rename", noremap = true, silent = false })
 
 function _G.set_terminal_keymaps()
     local opts = {buffer = 0}

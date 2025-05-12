@@ -89,7 +89,7 @@ return {
         {
             "nvim-treesitter/nvim-treesitter",
             build = function()
-                require("nvim-treesitter.install").update({ with_syinc = true})()
+                require("nvim-treesitter.install").update({ with_sync = true})()
             end,
             opts = {
                 ensure_installed = { "javascript", "python", "typescript", "html", "css", "lua" },
@@ -117,6 +117,10 @@ return {
                     end
                 })
             end,
+        },
+        { 
+            "danymat/neogen", 
+            config = true,
         }
     }
 }

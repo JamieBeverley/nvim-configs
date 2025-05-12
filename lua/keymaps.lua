@@ -8,6 +8,13 @@ vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-P>', telescope_builtin.find_files,
 vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
 
 
+-- doc string generation
+
+vim.keymap.set('n', '<leader>nf', function() require('neogen').generate({type="func"}) end, { desc = "Document function" })
+vim.keymap.set('n', '<leader>nc', function() require('neogen').generate({type="class"}) end, { desc = "Document class" })
+vim.keymap.set('n', '<leader>nl', function() require('neogen').generate({type="file"}) end, { desc = "Document file" })
+vim.keymap.set('n', '<leader>nt', function() require('neogen').generate({type="type"}) end, { desc = "Document type" })
+
 -- LSP commands feedback
 vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = "Show diagnostic at cursor" })
 vim.keymap.set('n', '<leader>lh', vim.lsp.buf.hover, { desc = "LSP hover to show types etc..." })

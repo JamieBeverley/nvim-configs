@@ -22,3 +22,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+vim.filetype.add({
+    pattern={
+        ['.*%.py%.j2'] = 'python',
+    }
+})

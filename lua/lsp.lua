@@ -11,36 +11,6 @@ null_ls.setup({
 -- LSP
 local lspconfig = require('lspconfig')
 local util = require('lspconfig.util')
--- lspconfig.basedpyright.setup {
---       settings = {
---          basedpyright = {
---  
---          }
---      }
--- }
---
-
--- lspconfig.pyright.setup({
---   root_dir = util.root_pattern('pyrightconfig.json', 'pyproject.toml', '.git'),
--- 
---   before_init = function(_, config)
---     local root = config.root_dir
---     local pyright_config = root .. '/pyrightconfig.json'
---     local has_pyright_config = vim.fn.filereadable(pyright_config) == 1
--- 
---     if not has_pyright_config then
---       print("didn't find pyrightconfig.json, defaulting venv path to .venv")
---       print(root)
---       config.settings = vim.tbl_deep_extend("force", config.settings or {}, {
---         python = {
---           venvPath = root,
---           venv = ".venv",
---         }
---       })
---     end
---   end,
--- })
-
 local root_pattern = util.root_pattern('pyrightconfig.json', 'pyproject.toml', '.git')
 
 lspconfig.pyright.setup({

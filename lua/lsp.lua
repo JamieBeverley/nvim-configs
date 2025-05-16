@@ -10,12 +10,17 @@ null_ls.setup({
 
 -- LSP
 local lspconfig = require('lspconfig')
-lspconfig.basedpyright.setup {
-      settings = {
-         basedpyright = {
- 
-         }
-     }
+-- lspconfig.basedpyright.setup {
+--       settings = {
+--          basedpyright = {
+--  
+--          }
+--      }
+-- }
+lspconfig.pyright.setup {
+    settings = {
+        pyright = {}
+    }
 }
 
 lspconfig.ts_ls.setup{}

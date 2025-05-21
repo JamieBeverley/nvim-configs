@@ -27,3 +27,7 @@ vim.filetype.add({
         ['.*%.py%.j2'] = 'python',
     }
 })
+
+
+-- disable copilot by default
+vim.g.copilot_enabled = 0

@@ -8,6 +8,38 @@ vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-P>', telescope_builtin.find_files,
 vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
 
 
+-- Visual selection utils
+vim.keymap.set('v', '<leader>slw', function()
+  vim.fn.feedkeys(':s/\\s*\\(.*\\)/\\1/g', 'n')
+end,
+{desc="sed leading whitespace"}
+)
+-- Append to the end of the line
+vim.keymap.set('v', '<leader>sa', function()
+  vim.fn.feedkeys(':s/\\(.*\\)/\\1', 'n')
+end,
+{desc="sed append to all lines"}
+)
+
+-- copy first workd of each line
+vim.keymap.set('v', '<leader>fw', function()
+  local start_line = vim.fn.line("v")
+  local end_line = vim.fn.line(".")
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+
+  local words = {}
+  for i = start_line, end_line do
+    local line = vim.fn.getline(i)
+    local word = line:match("([^%s:=,;{}()%[%]<>]+)")
+    if word then table.insert(words, word) end
+  end
+
+  vim.fn.setreg("+", table.concat(words, "\n"))
+  print("Copied first word(s) to clipboard")
+end, { desc = "Copy first word of each line to clipboard" })
+
 -- doc string generation
 
 vim.keymap.set('n', '<leader>nf', function() require('neogen').generate({type="func"}) end, { desc = "Document function" })

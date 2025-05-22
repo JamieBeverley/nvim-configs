@@ -22,3 +22,12 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+vim.filetype.add({
+    pattern={
+        ['.*%.py%.j2'] = 'python',
+    }
+})
+
+
+-- disable copilot by default
+vim.g.copilot_enabled = 0

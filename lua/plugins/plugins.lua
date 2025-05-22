@@ -122,5 +122,9 @@ return {
             "danymat/neogen", 
             config = true,
         }
+    },
+    -- copilot...
+    {
+        "github/copilot.vim"
     }
 }

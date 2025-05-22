@@ -8,3 +8,10 @@ def ys(thing: str):
 
 
 print("hello")
+
+thing = {
+    "fdsa": "fdsa",
+    "asdf": "asdf",
+    "qwer": "qwer",
+    "ytre": "ytre",
+}

@@ -11,17 +11,47 @@ return {
         "hrsh7th/nvim-cmp",
         opts = function ()
             local cmp = require('cmp');
+            local lsp_types = require("cmp.types").lsp
             return {
-                snippet = {
-                    -- REQUIRED - you must specify a snippet engine
-                    expand = function(args)
-                        -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-                        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
-                        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
-                        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
-                        vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+                sorting = {
+                priority_weight = 2,
+                comparators = {
+                    -- Prioritize function parameters and variables
+                    function(entry1, entry2)
+                        local kind1 = entry1:get_kind()
+                        local kind2 = entry2:get_kind()
 
-                        -- For `mini.snippets` users:
+                        local param_kinds = {
+                            [lsp_types.CompletionItemKind.Variable] = true,
+                            --[lsp_types.CompletionItemKind.Parameter] = true,
+                        }
+
+                        local is_param1 = param_kinds[kind1] or false
+                        local is_param2 = param_kinds[kind2] or false
+
+                        if is_param1 ~= is_param2 then
+                            return is_param1
+                        end
+                    end,
+                    cmp.config.compare.offset,
+                    cmp.config.compare.exact,
+                    cmp.config.compare.score,
+                    cmp.config.compare.kind,
+                    cmp.config.compare.sort_text,
+                    cmp.config.compare.length,
+                    cmp.config.compare.order,
+                },
+            },
+            snippet = {
+                -- REQUIRED - you must specify a snippet engine
+                expand = function(args)
+                    -- vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+                    -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                    -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+                    -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+                    vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+
+                    -- For `mini.snippets` users:
                         -- local insert = MiniSnippets.config.expand.insert or MiniSnippets.default_insert
                         -- insert({ body = args.body }) -- Insert at cursor
                         -- cmp.resubscribe({ "TextChangedI", "TextChangedP" })

@@ -8,6 +8,18 @@ vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-P>', telescope_builtin.find_files,
 vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
 
 
+-- code companion chat
+vim.keymap.set('n', '<leader>ccc', function()
+  vim.fn.feedkeys(':CodeCompanionChat toggle\n', 'n')
+end, { noremap=true, silent=true, desc="CodeCompanionChat toggle" })
+
+vim.keymap.set('n', '<leader>cca', function()
+  vim.fn.feedkeys(':CodeCompanionActions \n', 'n')
+end, { noremap=true, silent=true, desc="CodeCompanionActions" })
+
+
+
+
 -- Visual selection utils
 vim.keymap.set('v', '<leader>slw', function()
   vim.fn.feedkeys(':s/\\s*\\(.*\\)/\\1/g', 'n')

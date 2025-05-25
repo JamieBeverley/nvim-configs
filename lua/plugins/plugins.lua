@@ -1,6 +1,78 @@
 
 
 return {
+    {
+        "olimorris/codecompanion.nvim",
+        opts = function()
+            return require("codecompanion").setup({
+                display = {
+                    chat = {
+                        -- Change the default icons
+                        icons = {
+                            pinned_buffer = " ",
+                            watched_buffer = "👀 ",
+                        },
+
+                        debug_window = {
+                            ---@return number|fun(): number
+                            width = vim.o.columns - 5,
+                            ---@return number|fun(): number
+                            height = vim.o.lines - 2,
+                        },
+
+                        -- Options to customize the UI of the chat buffer
+                        window = {
+                            layout = "vertical", -- float|vertical|horizontal|buffer
+                            position = nil, -- left|right|top|bottom (nil will default depending on vim.opt.splitright|vim.opt.splitbelow)
+                            border = "single",
+                            height = 0.8,
+                            width = 0.1,
+                            relative = "editor",
+                            -- full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
+                            opts = {
+                                breakindent = true,
+                                cursorcolumn = false,
+                                cursorline = false,
+                                foldcolumn = "0",
+                                linebreak = true,
+                                list = false,
+                                numberwidth = 1,
+                                signcolumn = "no",
+                                spell = false,
+                                wrap = true,
+                            },
+                        },
+                    }
+                }
+            })
+        end,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-treesitter/nvim-treesitter",
+        },
+    },
+    -- {
+    --     "ravitemer/mcphub.nvim",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --     },
+    --     build = "npm install -g mcp-hub@latest",  -- Installs `mcp-hub` node binary globally
+    --     config = function()
+    --         local config_file_name = "/mcp-servers.json"
+    --         local mcp_servers_json = vim.fn.getcwd() .. config_file_name
+    --         -- if the file doesn't exist default to ~/.config/nvim/mcp-servers.json
+    --         if not vim.loop.fs_stat(mcp_servers_json) then
+    --             mcp_servers_json = vim.fn.stdpath("config") .. config_file_name
+    --         end
+    --
+    --         require("mcphub").setup({
+    --             config = mcp_servers_json,
+    --             log = {
+    --                 level = vim.log.levels.DEBUG,
+    --             }
+    --         })
+    --     end
+    -- },
     -- multicursor
     {
         "mg979/vim-visual-multi",
@@ -141,6 +213,7 @@ return {
                     -- renderer = { icons = { show = { file = false, folder = false } } },
                     git = { ignore = false }
                 }
+                -- auto-open NvimTree when nvim is opened
                 vim.api.nvim_create_autocmd({ "VimEnter" }, {
                     callback = function()
                         require("nvim-tree.api").tree.open()

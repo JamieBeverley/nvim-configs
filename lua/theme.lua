@@ -1,4 +1,4 @@
 
 -- color
-vim.cmd("colorscheme habamax")
+vim.cmd("colorscheme default")
 

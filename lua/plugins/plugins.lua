@@ -3,8 +3,39 @@
 return {
     {
         "olimorris/codecompanion.nvim",
-        opts = function()
+        config = function()
             return require("codecompanion").setup({
+                strategies = {
+                    chat = {
+                        adapter = "ollama"
+                    }
+                },
+                -- adapters = {
+                --     openai = {
+                --         api_key = "ollama", -- dummy value, required by some tools
+                --         base_url = "http://localhost:11434/v1",
+                --         model = "llama3.2", -- match your local model name
+                --     }
+                -- },
+                -- chat = {
+                --     model = "llama3.2",
+                --     adapter = "openai",
+                -- },
+                chat = { adapater = "ollama", model = "llama3.2" },
+                adapters = {
+                    ollama = function()
+                        return require("codecompanion.adapters").extend("ollama", {
+                            env = {
+                                url = "http://localhost:11434",
+                            },
+                            parameters = {
+                                sync = true,
+                            },
+                        })
+                    end,
+                },
+
+ 
                 display = {
                     chat = {
                         -- Change the default icons
@@ -24,9 +55,9 @@ return {
                         window = {
                             layout = "vertical", -- float|vertical|horizontal|buffer
                             position = nil, -- left|right|top|bottom (nil will default depending on vim.opt.splitright|vim.opt.splitbelow)
-                            border = "single",
+                            border = "2",
                             height = 0.8,
-                            width = 0.1,
+                            width = 0.2,
                             relative = "editor",
                             -- full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
                             opts = {
@@ -227,7 +258,7 @@ return {
         }
     },
     -- copilot...
-    {
-        "github/copilot.vim"
-    }
+    -- {
+    --     "github/copilot.vim"
+    -- }
 }

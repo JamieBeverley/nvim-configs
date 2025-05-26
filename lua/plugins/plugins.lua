@@ -7,26 +7,21 @@ return {
             return require("codecompanion").setup({
                 strategies = {
                     chat = {
-                        adapter = "ollama"
+                        adapter = "ollama",
+                        -- model = "llama3.2",
+                        model = "deepseek-r1"
                     }
                 },
-                -- adapters = {
-                --     openai = {
-                --         api_key = "ollama", -- dummy value, required by some tools
-                --         base_url = "http://localhost:11434/v1",
-                --         model = "llama3.2", -- match your local model name
-                --     }
-                -- },
-                -- chat = {
-                --     model = "llama3.2",
-                --     adapter = "openai",
-                -- },
-                chat = { adapater = "ollama", model = "llama3.2" },
                 adapters = {
                     ollama = function()
                         return require("codecompanion.adapters").extend("ollama", {
+                            schema = {
+                                model = {
+                                    default = "llama3",
+                                }
+                            },
                             env = {
-                                url = "http://localhost:11434",
+                                url = "http://localhost:11434"
                             },
                             parameters = {
                                 sync = true,
@@ -34,8 +29,6 @@ return {
                         })
                     end,
                 },
-
- 
                 display = {
                     chat = {
                         -- Change the default icons

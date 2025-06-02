@@ -1,4 +1,5 @@
-pip install basedpyright black isort
+:: Make sure global python Scripts dir is on your PATH
+pip install pyright black isort :: basedpyright
 
 npm install -g typescript typescript-language-server
 

@@ -62,7 +62,20 @@ vim.keymap.set('n', '<leader>nt', function() require('neogen').generate({type="t
 -- LSP commands feedback
 vim.keymap.set('n', '<leader>le', vim.diagnostic.open_float, { desc = "Show diagnostic at cursor" })
 vim.keymap.set('n', '<leader>lh', vim.lsp.buf.hover, { desc = "LSP hover to show types etc..." })
-vim.keymap.set('n', '<leader>lrf', vim.lsp.buf.references, { desc = "Show references" })
+vim.keymap.set('n', '<leader>lrf', function()
+    telescope_builtin.lsp_references({
+        layout_strategy = 'vertical',
+        layout_config = {
+            anchor = "E",
+            width = 0.5,
+            height = 0.9,
+            prompt_position = "bottom",
+        },
+    })
+vim.keymap.set('n', '<leader>lrr', require('telescope.builtin').resume, { desc = "Resume last Telescope search" })
+
+end, -- vim.lsp.buf.references,
+{ desc = "Show references" })
 vim.keymap.set('n', '<leader>lrn', vim.lsp.buf.rename, { desc = "Rename", noremap = true, silent = false })
 
 function _G.set_terminal_keymaps()

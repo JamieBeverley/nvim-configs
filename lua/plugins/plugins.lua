@@ -2,6 +2,11 @@
 
 return {
     {
+        dir = "/home/jamie/repos/experiments/nvim-tidal",
+        name="nvim-tidal",
+        lazy = false,
+    },
+    {
         "olimorris/codecompanion.nvim",
         config = function()
             return require("codecompanion").setup({

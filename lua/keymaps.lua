@@ -121,6 +121,26 @@ vim.keymap.set({ 'i', 'n' }, '<C-H>', [[<C-W><C-H>]], { noremap = true, silent =
 vim.keymap.set({ 'i', 'n' }, '<C-J>', [[<C-W><C-J>]], { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-K>', [[<C-W><C-K>]], { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-L>', [[<C-W><C-L>]], { noremap = true, silent = true })
+
+
+local tidal = require("nvim-tidal")
+vim.keymap.set("n", "<leader>te", function()
+    tidal.evaluate_block()
+end, { desc = "Tidal Evaluate Block" })
+vim.keymap.set("n", "<leader>ts", function()
+    tidal.start()
+end, { desc = "Tidal Evaluate Block" })
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "haskell",
+    callback = function()
+        vim.keymap.set({ "i", "n" }, "<C-S>", function()
+            require("nvim-tidal").evaluate_block()
+        end, { buffer = true, desc = "Tidal Evaluate Block" })
+    end,
+})
+
+
 -- Disabled for now -> possibly use in place of toggleterm
 -- function _G.set_terminal_keymaps()
 --     local opts = {buffer = 0}

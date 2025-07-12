@@ -29,6 +29,12 @@ vim.filetype.add({
     }
 })
 
+vim.filetype.add({
+    extension = {
+        tidal = "haskell",
+    }
+})
+
 
 -- disable copilot by default
 vim.g.copilot_enabled = 0

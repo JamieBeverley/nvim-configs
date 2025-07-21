@@ -26,8 +26,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 
 vim.filetype.add({
-    pattern={
+    pattern = {
         ['.*%.py%.j2'] = 'python',
+    }
+})
+
+vim.filetype.add({
+    extension = {
+        tidal = "haskell",
     }
 })
 

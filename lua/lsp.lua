@@ -1,4 +1,3 @@
-
 -- Formatters
 local null_ls = require("null-ls")
 null_ls.setup({
@@ -43,8 +42,9 @@ lspconfig.pyright.setup({
     end)()
 })
 
-lspconfig.ts_ls.setup{}
-lspconfig.hls.setup{
+lspconfig.ts_ls.setup {}
+lspconfig.hls.setup {
     filetypes = { 'haskell', 'lhaskell', 'cabal' }
 }
 
+lspconfig.lua_ls.setup {}

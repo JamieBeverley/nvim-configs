@@ -18,6 +18,9 @@ vim.keymap.set('n', '<leader>cca', function()
 end, { noremap=true, silent=true, desc="CodeCompanionActions" })
 
 
+-- :Q aliases
+vim.api.nvim_create_user_command('Q', 'q', { bang = true, nargs = '?' })
+vim.api.nvim_create_user_command('Qa', 'qa', { bang = true })
 
 
 -- Visual selection utils

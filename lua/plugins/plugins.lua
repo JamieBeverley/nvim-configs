@@ -1,6 +1,7 @@
 return {
     {
-        dir = "/home/jamie/repos/experiments/nvim-tidal",
+        "jamiebeverley/nvim-tidal",
+        -- dir = "/home/jamie/repos/experiments/nvim-tidal",
         name = "nvim-tidal",
         lazy = false,
         config = function()

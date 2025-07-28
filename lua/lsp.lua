@@ -15,6 +15,9 @@ local root_pattern = util.root_pattern('pyrightconfig.json', 'pyproject.toml', '
 lspconfig.pyright.setup({
     root_dir = root_pattern,
     settings = (function()
+        -- TODO this isn't quite right...
+        -- quick fix is just to make pyrightconfig.json lives
+        -- in cwd, eg: {"venvPath": ".", "venv": ".venv"}
         local root = root_pattern(vim.fn.getcwd())
         if not root then
             return {}
@@ -23,12 +26,14 @@ lspconfig.pyright.setup({
         local pyright_config = root and root .. '/pyrightconfig.json'
         local has_pyright_config = pyright_config and vim.fn.filereadable(pyright_config) == 1
         if has_pyright_config then
+            print("using", pyright_config)
             return {} -- Don't override; let pyrightconfig.json handle it
         else
             -- if root/.venv exists then use it, otherwise leave unconfigured
             local venv = root .. '.venv'
             local has_venv = venv and vim.fn.isdirectory(venv) == 1
             if has_venv then
+                print("found venv at ", venv," - using that")
                 return {
                     python = {
                         venvPath = root,

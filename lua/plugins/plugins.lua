@@ -13,13 +13,16 @@ return {
     {
         "olimorris/codecompanion.nvim",
         config = function()
+            local model = {
+                adapter = "ollama",
+                model = "llama3.2",
+            }
+
             return require("codecompanion").setup({
                 strategies = {
-                    chat = {
-                        adapter = "ollama",
-                        -- model = "llama3.2",
-                        model = "deepseek-r1"
-                    }
+                    chat = model,
+                    inline = model,
+                    cmd = model,
                 },
                 adapters = {
                     ollama = function()

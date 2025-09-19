@@ -28,6 +28,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 vim.filetype.add({
     pattern = {
         ['.*%.py%.j2'] = 'python',
+        ['.*%.sql%.j2'] = 'sql',
     }
 })
 

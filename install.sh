@@ -14,5 +14,8 @@ cd ..
 sudo mv lua-language-server /usr/local/bin/lua-language-server
 echo "make sure /usr/local/bin/lua-language-server/bin/lua-language-server is on PATH"
 
+# Install jsonls language server
+npm i -g vscode-langservers-extracted
+
 # TODO: install haskell and haskell-language-server
 

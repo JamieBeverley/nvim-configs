@@ -53,3 +53,17 @@ lspconfig.hls.setup {
 }
 
 lspconfig.lua_ls.setup {}
+
+lspconfig.jsonls.setup {
+    init_options = {
+        provideFormatter = true
+    },
+    commands = {
+      Format = {
+        function()
+            vim.lsp.buf.format({timeout_ms=5000})
+            -- vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+      }
+    }
+}

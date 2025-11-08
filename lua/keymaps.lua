@@ -12,8 +12,6 @@ vim.keymap.set('n', '<leader>tree', function()
     vim.fn.feedkeys(':NvimTreeToggle\n', 'n')
 end, { noremap = true, silent = true, desc = "NvimTreeToggle" })
 
-
-
 -- code companion chat
 vim.keymap.set('n', '<leader>ccc', function()
     vim.fn.feedkeys(':CodeCompanionChat toggle\n', 'n')
@@ -131,6 +129,9 @@ vim.keymap.set({ 'i', 'n' }, '<C-J>', [[<C-W><C-J>]], { noremap = true, silent =
 vim.keymap.set({ 'i', 'n' }, '<C-K>', [[<C-W><C-K>]], { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-L>', [[<C-W><C-L>]], { noremap = true, silent = true })
 
+-- shift l/h for tabbing between buffers
+vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
+vim.keymap.set("n", "<S-h>", ":bprev<CR>", { silent = true })
 
 local tidal = require("nvim-tidal")
 vim.keymap.set("n", "<leader>te", function()

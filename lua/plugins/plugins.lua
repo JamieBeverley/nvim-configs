@@ -14,7 +14,7 @@ return {
                     offsets = {
                         {
                             filetype = "NvimTree",
-                            text = "",
+                            text = "Files",
                             separator = false,
                         },
                     },

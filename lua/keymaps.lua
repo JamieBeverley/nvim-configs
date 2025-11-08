@@ -8,6 +8,12 @@ vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-P>', telescope_builtin.find_file
 vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
 
 
+vim.keymap.set('n', '<leader>tree', function()
+    vim.fn.feedkeys(':NvimTreeToggle\n', 'n')
+end, { noremap = true, silent = true, desc = "NvimTreeToggle" })
+
+
+
 -- code companion chat
 vim.keymap.set('n', '<leader>ccc', function()
     vim.fn.feedkeys(':CodeCompanionChat toggle\n', 'n')

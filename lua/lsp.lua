@@ -33,7 +33,7 @@ lspconfig.pyright.setup({
             local venv = root .. '.venv'
             local has_venv = venv and vim.fn.isdirectory(venv) == 1
             if has_venv then
-                print("found venv at ", venv," - using that")
+                print("found venv at ", venv, " - using that")
                 return {
                     python = {
                         venvPath = root,
@@ -53,3 +53,16 @@ lspconfig.hls.setup {
 }
 
 lspconfig.lua_ls.setup {}
+
+if os.getenv("JAMIE_USES_RUST") == "TRUE" then
+    lspconfig.rust_analyzer.setup({
+        settings = {
+            ["rust-analyzer"] = {
+                cargo = { allFeatures = true },
+                checkOnSave = {
+                    command = "clippy"
+                },
+            },
+        },
+    })
+end

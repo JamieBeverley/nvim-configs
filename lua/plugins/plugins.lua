@@ -1,5 +1,29 @@
 return {
     {
+        'akinsho/bufferline.nvim',
+        version = "v4.9.1",
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        config = function()
+            require("bufferline").setup({
+                options = {
+                    indicator = { style = "underline" }, -- options: 'icon', 'underline', 'none'
+                    mode = "buffers",                    -- show buffers (not tabs)
+                    show_buffer_close_icons = false,
+                    show_close_icon = false,
+                    separator_style = "thin",
+                    offsets = {
+                        {
+                            filetype = "NvimTree",
+                            text = "File Explorer",  -- optional label shown in the empty space
+                            highlight = "Directory", -- optional highlight group for the label
+                            separator = true,        -- adds a vertical line separator
+                        },
+                    },
+                },
+            })
+        end
+    },
+    {
         "jamiebeverley/nvim-tidal",
         -- dir = "/home/jamie/repos/experiments/nvim-tidal",
         name = "nvim-tidal",

@@ -11,6 +11,9 @@ vim.cmd('filetype plugin indent on')
 
 vim.opt.splitright = true
 
+-- required for bufferline
+vim.opt.termguicolors = true
+
 -- advised for nvim-tree
 vim.g.loaded_netrw = 1
 

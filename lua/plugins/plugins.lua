@@ -1,5 +1,28 @@
 return {
     {
+        'akinsho/bufferline.nvim',
+        version = "v4.9.1",
+        dependencies = 'nvim-tree/nvim-web-devicons',
+        config = function()
+            require("bufferline").setup({
+                options = {
+                    indicator = { style = "underline" }, -- options: 'icon', 'underline', 'none'
+                    mode = "buffers",                    -- show buffers (not tabs)
+                    show_buffer_close_icons = false,
+                    show_close_icon = false,
+                    separator_style = "thin",
+                    offsets = {
+                        {
+                            filetype = "NvimTree",
+                            text = "Files",
+                            separator = false,
+                        },
+                    },
+                },
+            })
+        end
+    },
+    {
         "jamiebeverley/nvim-tidal",
         -- dir = "/home/jamie/repos/experiments/nvim-tidal",
         name = "nvim-tidal",
@@ -13,13 +36,16 @@ return {
     {
         "olimorris/codecompanion.nvim",
         config = function()
+            local model = {
+                adapter = "ollama",
+                model = "llama3.2",
+            }
+
             return require("codecompanion").setup({
                 strategies = {
-                    chat = {
-                        adapter = "ollama",
-                        -- model = "llama3.2",
-                        model = "deepseek-r1"
-                    }
+                    chat = model,
+                    inline = model,
+                    cmd = model,
                 },
                 adapters = {
                     ollama = function()

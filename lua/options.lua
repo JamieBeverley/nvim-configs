@@ -10,7 +10,10 @@ vim.cmd('syntax enable')
 vim.cmd('filetype plugin indent on')
 
 vim.opt.splitright = true
+
+-- folding
 vim.opt.foldmethod = "indent"
+vim.opt.foldlevelstart = 99 -- don't fold close all by default
 
 -- required for bufferline
 vim.opt.termguicolors = true

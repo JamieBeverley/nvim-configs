@@ -26,6 +26,8 @@ end, { noremap = true, silent = true, desc = "CodeCompanionActions" })
 vim.api.nvim_create_user_command('Q', 'q', { bang = true, nargs = '?' })
 vim.api.nvim_create_user_command('Qa', 'qa', { bang = true })
 
+-- copy/paste: when in vis mode, don't yank vis selection when pasting
+vim.keymap.set("v", "p", '"_dP')
 
 -- Visual selection utils
 vim.keymap.set('v', '<leader>slw', function()

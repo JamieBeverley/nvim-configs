@@ -21,7 +21,7 @@ local function project_title()
   local emoji = color_emojis[(hash % #color_emojis) + 1]
   local project = vim.fn.fnamemodify(cwd, ":t")
 
-  return string.format("%s %s — nvim", emoji, project)
+  return string.format("%s %s", emoji, project)
 end
 
 _G.jamie_utils = {

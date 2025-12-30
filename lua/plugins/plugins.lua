@@ -1,4 +1,46 @@
+local open_code = {
+    "NickvanDyke/opencode.nvim",
+    dependencies = {
+        -- Recommended for `ask()` and `select()`.
+        -- Required for `snacks` provider.
+        ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+        { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+    },
+    config = function()
+        ---@type opencode.Opts
+        vim.g.opencode_opts = {
+            -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+        }
+
+        -- Required for `opts.events.reload`.
+        vim.o.autoread = true
+
+        -- Recommended/example keymaps.
+        vim.keymap.set({ "n", "x" }, "<C-a>", function() require("opencode").ask("@this: ", { submit = true }) end,
+            { desc = "Ask opencode" })
+        vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,
+            { desc = "Execute opencode action…" })
+        vim.keymap.set({ "n", "t" }, "<C-t>", function() require("opencode").toggle() end, { desc = "Toggle opencode" })
+
+        vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
+            { expr = true, desc = "Add range to opencode" })
+        vim.keymap.set("n", "goo", function() return require("opencode").operator("@this ") .. "_" end,
+            { expr = true, desc = "Add line to opencode" })
+
+        vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,
+            { desc = "opencode half page up" })
+        vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end,
+            { desc = "opencode half page down" })
+
+        -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
+        vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
+        vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
+    end,
+}
+
+
 return {
+    open_code,
     {
         'akinsho/bufferline.nvim',
         version = "v4.9.1",
@@ -32,83 +74,6 @@ return {
                 boot_tidal = "~/BootTidal.hs"
             })
         end
-    },
-    {
-        "olimorris/codecompanion.nvim",
-        config = function()
-            local model = {
-                adapter = "ollama",
-                model = "llama3.2",
-            }
-
-            return require("codecompanion").setup({
-                strategies = {
-                    chat = model,
-                    inline = model,
-                    cmd = model,
-                },
-                adapters = {
-                    ollama = function()
-                        return require("codecompanion.adapters").extend("ollama", {
-                            schema = {
-                                model = {
-                                    default = "llama3.2",
-                                }
-                            },
-                            env = {
-                                url = "http://localhost:11434"
-                            },
-                            parameters = {
-                                sync = true,
-                            },
-                        })
-                    end,
-                },
-                display = {
-                    chat = {
-                        -- Change the default icons
-                        icons = {
-                            pinned_buffer = " ",
-                            watched_buffer = "👀 ",
-                        },
-
-                        debug_window = {
-                            ---@return number|fun(): number
-                            width = vim.o.columns - 5,
-                            ---@return number|fun(): number
-                            height = vim.o.lines - 2,
-                        },
-
-                        -- Options to customize the UI of the chat buffer
-                        window = {
-                            layout = "vertical", -- float|vertical|horizontal|buffer
-                            position = nil,      -- left|right|top|bottom (nil will default depending on vim.opt.splitright|vim.opt.splitbelow)
-                            border = "2",
-                            height = 0.8,
-                            width = 0.2,
-                            relative = "editor",
-                            -- full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
-                            opts = {
-                                breakindent = true,
-                                cursorcolumn = false,
-                                cursorline = false,
-                                foldcolumn = "0",
-                                linebreak = true,
-                                list = false,
-                                numberwidth = 1,
-                                signcolumn = "no",
-                                spell = false,
-                                wrap = true,
-                            },
-                        },
-                    }
-                }
-            })
-        end,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-treesitter/nvim-treesitter",
-        },
     },
     -- {
     --     "ravitemer/mcphub.nvim",

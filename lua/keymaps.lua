@@ -7,6 +7,13 @@ vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telesco
 vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-P>', telescope_builtin.find_files, { noremap = true, silent = false })
 vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
 
+vim.keymap.set('n', '<leader>yp', function()
+  local abs = vim.fn.expand('%:p')
+  local cwd = vim.fn.getcwd()
+  local rel = abs:sub(#cwd + 2)  -- strip cwd + trailing slash
+  vim.fn.setreg('+', '@' .. rel)
+end, { desc = 'Yank relative file path with @ prefix' })
+
 
 vim.keymap.set('n', '<leader>tree', function()
     vim.fn.feedkeys(':NvimTreeToggle\n', 'n')

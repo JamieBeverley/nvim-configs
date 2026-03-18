@@ -33,6 +33,18 @@ end, { noremap = true, silent = true, desc = "NvimTreeToggle" })
 vim.api.nvim_create_user_command('Q', 'q', { bang = true, nargs = '?' })
 vim.api.nvim_create_user_command('Qa', 'qa', { bang = true })
 
+-- :Bd — delete buffer without closing window (works with nvim-tree split)
+vim.api.nvim_create_user_command('Bd', function()
+    local cur = vim.fn.bufnr()
+    local listed = vim.fn.getbufinfo({ buflisted = 1 })
+    if #listed > 1 then
+        vim.cmd('bnext')
+    end
+    vim.cmd('bdelete ' .. cur)
+end, { bang = true, desc = 'Delete buffer without closing window' })
+
+vim.cmd('cnoreabbrev bd Bd')
+
 -- copy/paste: when in vis mode, don't yank vis selection when pasting
 vim.keymap.set("v", "p", '"_dP')
 

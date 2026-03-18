@@ -13,14 +13,14 @@ vim.keymap.set('n', '<leader>tree', function()
 end, { noremap = true, silent = true, desc = "NvimTreeToggle" })
 
 -- code companion chat
-vim.keymap.set('n', '<leader>ccc', function()
-    vim.fn.feedkeys(':CodeCompanionChat toggle\n', 'n')
-end, { noremap = true, silent = true, desc = "CodeCompanionChat toggle" })
-
-vim.keymap.set('n', '<leader>cca', function()
-    vim.fn.feedkeys(':CodeCompanionActions \n', 'n')
-end, { noremap = true, silent = true, desc = "CodeCompanionActions" })
-
+-- vim.keymap.set('n', '<leader>ccc', function()
+--     vim.fn.feedkeys(':CodeCompanionChat toggle\n', 'n')
+-- end, { noremap = true, silent = true, desc = "CodeCompanionChat toggle" })
+--
+-- vim.keymap.set('n', '<leader>cca', function()
+--     vim.fn.feedkeys(':CodeCompanionActions \n', 'n')
+-- end, { noremap = true, silent = true, desc = "CodeCompanionActions" })
+--
 
 -- :Q aliases
 vim.api.nvim_create_user_command('Q', 'q', { bang = true, nargs = '?' })

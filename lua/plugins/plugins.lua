@@ -1,46 +1,76 @@
-local open_code = {
-    "NickvanDyke/opencode.nvim",
+-- local open_code = {
+--     "NickvanDyke/opencode.nvim",
+--     dependencies = {
+--         -- Recommended for `ask()` and `select()`.
+--         -- Required for `snacks` provider.
+--         ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+--         { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+--     },
+--     config = function()
+--         ---@type opencode.Opts
+--         vim.g.opencode_opts = {
+--             -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
+--         }
+--
+--         -- Required for `opts.events.reload`.
+--         vim.o.autoread = true
+--
+--         -- Recommended/example keymaps.
+--         vim.keymap.set({ "n", "x" }, "<C-a>", function() require("opencode").ask("@this: ", { submit = true }) end,
+--             { desc = "Ask opencode" })
+--         vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,
+--             { desc = "Execute opencode action…" })
+--         vim.keymap.set({ "n", "t" }, "<C-t>", function() require("opencode").toggle() end, { desc = "Toggle opencode" })
+--
+--         vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
+--             { expr = true, desc = "Add range to opencode" })
+--         vim.keymap.set("n", "goo", function() return require("opencode").operator("@this ") .. "_" end,
+--             { expr = true, desc = "Add line to opencode" })
+--
+--         vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,
+--             { desc = "opencode half page up" })
+--         vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end,
+--             { desc = "opencode half page down" })
+--
+--         -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
+--         vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
+--         vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
+--     end,
+-- }
+--
+
+local claude = {
+    "greggh/claude-code.nvim",
     dependencies = {
-        -- Recommended for `ask()` and `select()`.
-        -- Required for `snacks` provider.
-        ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
-        { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+        "nvim-lua/plenary.nvim", -- Required for git operations
     },
     config = function()
-        ---@type opencode.Opts
-        vim.g.opencode_opts = {
-            -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
-        }
-
-        -- Required for `opts.events.reload`.
-        vim.o.autoread = true
-
-        -- Recommended/example keymaps.
-        vim.keymap.set({ "n", "x" }, "<C-a>", function() require("opencode").ask("@this: ", { submit = true }) end,
-            { desc = "Ask opencode" })
-        vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,
-            { desc = "Execute opencode action…" })
-        vim.keymap.set({ "n", "t" }, "<C-t>", function() require("opencode").toggle() end, { desc = "Toggle opencode" })
-
-        vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
-            { expr = true, desc = "Add range to opencode" })
-        vim.keymap.set("n", "goo", function() return require("opencode").operator("@this ") .. "_" end,
-            { expr = true, desc = "Add line to opencode" })
-
-        vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,
-            { desc = "opencode half page up" })
-        vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end,
-            { desc = "opencode half page down" })
-
-        -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
-        vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
-        vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
-    end,
+        require("claude-code").setup(
+            {
+                window = {
+                    position = "vertical", -- Position of the window: "botright", "topleft", "vertical", "float", etc.
+                },
+                keymaps = {
+                    toggle = {
+                        normal = "<C-_>",            -- Normal mode keymap for toggling Claude Code, false to disable
+                        terminal = "<C-_>",          -- Terminal mode keymap for toggling Claude Code, false to disable
+                        variants = {
+                            continue = "<leader>cC", -- Normal mode keymap for Claude Code with continue flag
+                            verbose = "<leader>cV",  -- Normal mode keymap for Claude Code with verbose flag
+                        },
+                    },
+                    window_navigation = true, -- Enable window navigation keymaps (<C-h/j/k/l>)
+                    scrolling = true,         -- Enable scrolling keymaps (<C-f/b>) for page up/down
+                }
+            }
+        )
+    end
 }
 
 
 return {
-    open_code,
+    -- open_code,
+    claude,
     {
         'akinsho/bufferline.nvim',
         version = "v4.9.1",

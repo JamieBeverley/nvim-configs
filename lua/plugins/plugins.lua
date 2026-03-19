@@ -49,6 +49,8 @@ local claude = {
             {
                 window = {
                     position = "vertical", -- Position of the window: "botright", "topleft", "vertical", "float", etc.
+                    enter_insert = false,         -- Don't auto-enter insert mode when switching to Claude buffer
+                    start_in_normal_mode = true,  -- Prevent force_insert_mode autocmd from overriding enter_insert
                 },
                 keymaps = {
                     toggle = {

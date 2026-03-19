@@ -48,6 +48,13 @@ vim.filetype.add({
     }
 })
 
+vim.filetype.add({
+    extension = {
+        todo = "markdown",
+    }
+})
+
+
 
 -- disable copilot by default
 vim.g.copilot_enabled = 0

@@ -19,3 +19,7 @@ npm i -g vscode-langservers-extracted
 
 # TODO: install haskell and haskell-language-server
 
+# purescript lsp
+```
+npm i -g purescript-language-server
+```

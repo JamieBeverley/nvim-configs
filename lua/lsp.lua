@@ -59,12 +59,12 @@ lspconfig.jsonls.setup {
         provideFormatter = true
     },
     commands = {
-      Format = {
-        function()
-            vim.lsp.buf.format({timeout_ms=5000})
-            -- vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
+        Format = {
+            function()
+                vim.lsp.buf.format({ timeout_ms = 5000 })
+                -- vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+            end
+        }
     }
 }
 if os.getenv("JAMIE_USES_RUST") == "TRUE" then
@@ -79,3 +79,5 @@ if os.getenv("JAMIE_USES_RUST") == "TRUE" then
         },
     })
 end
+
+lspconfig.purescriptls.setup {}

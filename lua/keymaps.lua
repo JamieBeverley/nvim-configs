@@ -5,13 +5,29 @@ vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, { desc = 'Telescope
 vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
 
 vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-P>', telescope_builtin.find_files, { noremap = true, silent = false })
-vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-G>', telescope_builtin.live_grep, { noremap = true, silent = false })
+local last_grep_query = ""
+vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-G>', function()
+    telescope_builtin.live_grep({
+        default_text = last_grep_query,
+        attach_mappings = function(prompt_bufnr, _)
+            local action_state = require('telescope.actions.state')
+            vim.api.nvim_create_autocmd("BufLeave", {
+                buffer = prompt_bufnr,
+                once = true,
+                callback = function()
+                    last_grep_query = action_state.get_current_line()
+                end,
+            })
+            return true
+        end,
+    })
+end, { noremap = true, silent = false })
 
 vim.keymap.set('n', '<leader>yp', function()
-  local abs = vim.fn.expand('%:p')
-  local cwd = vim.fn.getcwd()
-  local rel = abs:sub(#cwd + 2)  -- strip cwd + trailing slash
-  vim.fn.setreg('+', '@' .. rel)
+    local abs = vim.fn.expand('%:p')
+    local cwd = vim.fn.getcwd()
+    local rel = abs:sub(#cwd + 2) -- strip cwd + trailing slash
+    vim.fn.setreg('+', '@' .. rel)
 end, { desc = 'Yank relative file path with @ prefix' })
 
 
@@ -34,13 +50,14 @@ vim.api.nvim_create_user_command('Q', 'q', { bang = true, nargs = '?' })
 vim.api.nvim_create_user_command('Qa', 'qa', { bang = true })
 
 -- :Bd — delete buffer without closing window (works with nvim-tree split)
-vim.api.nvim_create_user_command('Bd', function()
+vim.api.nvim_create_user_command('Bd', function(opts)
     local cur = vim.fn.bufnr()
     local listed = vim.fn.getbufinfo({ buflisted = 1 })
     if #listed > 1 then
         vim.cmd('bnext')
     end
-    vim.cmd('bdelete ' .. cur)
+    local bang = opts.bang and '!' or ''
+    vim.cmd('bdelete' .. bang .. ' ' .. cur)
 end, { bang = true, desc = 'Delete buffer without closing window' })
 
 vim.cmd('cnoreabbrev bd Bd')
@@ -104,10 +121,11 @@ vim.keymap.set('n', '<leader>lrf', function()
                 prompt_position = "bottom",
             },
         })
-        vim.keymap.set('n', '<leader>lrr', require('telescope.builtin').resume, { desc = "Resume last Telescope search" })
     end, -- vim.lsp.buf.references,
     { desc = "Show references" })
 vim.keymap.set('n', '<leader>lrn', vim.lsp.buf.rename, { desc = "Rename", noremap = true, silent = false })
+
+vim.keymap.set('n', '<leader>lrr', require('telescope.builtin').resume, { desc = "Resume last Telescope search" })
 
 function _G.set_terminal_keymaps()
     local opts = { buffer = 0 }

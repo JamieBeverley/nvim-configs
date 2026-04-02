@@ -47,6 +47,13 @@ local claude = {
     config = function()
         require("claude-code").setup(
             {
+                -- Name each session after the project (git root name, or cwd name outside git repos)
+                command = "bash -c 'claude --name \"$(basename $(git rev-parse --show-toplevel 2>/dev/null || pwd))\"'",
+                command_variants = {
+                    continue = "--continue",
+                    resume = "--resume",
+                    verbose = "--verbose",
+                },
                 window = {
                     position = "vertical", -- Position of the window: "botright", "topleft", "vertical", "float", etc.
                     enter_insert = false,         -- Don't auto-enter insert mode when switching to Claude buffer
@@ -57,8 +64,9 @@ local claude = {
                         normal = "<C-_>",            -- Normal mode keymap for toggling Claude Code, false to disable
                         terminal = "<C-_>",          -- Terminal mode keymap for toggling Claude Code, false to disable
                         variants = {
-                            continue = "<leader>cC", -- Normal mode keymap for Claude Code with continue flag
-                            verbose = "<leader>cV",  -- Normal mode keymap for Claude Code with verbose flag
+                            continue = "<leader>cC", -- Continue most recent session
+                            resume = "<leader>cR",   -- Interactive session picker
+                            verbose = "<leader>cV",
                         },
                     },
                     window_navigation = true, -- Enable window navigation keymaps (<C-h/j/k/l>)

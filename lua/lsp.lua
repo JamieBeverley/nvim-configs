@@ -54,6 +54,8 @@ lspconfig.hls.setup {
 
 lspconfig.lua_ls.setup {}
 
+-- lspconfig.marksman.setup {}
+
 lspconfig.jsonls.setup {
     init_options = {
         provideFormatter = true

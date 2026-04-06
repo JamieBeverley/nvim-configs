@@ -54,6 +54,14 @@ vim.filetype.add({
     }
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.tabstop = 2
+    end,
+})
+
 
 
 -- disable copilot by default

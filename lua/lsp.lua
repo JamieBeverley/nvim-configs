@@ -54,17 +54,19 @@ lspconfig.hls.setup {
 
 lspconfig.lua_ls.setup {}
 
+-- lspconfig.marksman.setup {}
+
 lspconfig.jsonls.setup {
     init_options = {
         provideFormatter = true
     },
     commands = {
-      Format = {
-        function()
-            vim.lsp.buf.format({timeout_ms=5000})
-            -- vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
-        end
-      }
+        Format = {
+            function()
+                vim.lsp.buf.format({ timeout_ms = 5000 })
+                -- vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+            end
+        }
     }
 }
 if os.getenv("JAMIE_USES_RUST") == "TRUE" then
@@ -79,3 +81,5 @@ if os.getenv("JAMIE_USES_RUST") == "TRUE" then
         },
     })
 end
+
+lspconfig.purescriptls.setup {}

@@ -17,5 +17,14 @@ echo "make sure /usr/local/bin/lua-language-server/bin/lua-language-server is on
 # Install jsonls language server
 npm i -g vscode-langservers-extracted
 
+# markdown lsp
+# curl -Lo ~/.local/bin/marksman https://github.com/artempyanykh/marksman/releases/latest/download/marksman-linux-x64
+# chmod +x ~/.local/bin/marksman 
+
+
 # TODO: install haskell and haskell-language-server
 
+# purescript lsp
+```
+npm i -g purescript-language-server
+```

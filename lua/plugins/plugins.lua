@@ -61,8 +61,8 @@ local claude = {
                 },
                 keymaps = {
                     toggle = {
-                        normal = "<C-_>",            -- Normal mode keymap for toggling Claude Code, false to disable
-                        terminal = "<C-_>",          -- Terminal mode keymap for toggling Claude Code, false to disable
+                        normal = "<C-\\>",            -- Normal mode keymap for toggling Claude Code, false to disable
+                        terminal = "<C-\\>",          -- Terminal mode keymap for toggling Claude Code, false to disable
                         variants = {
                             continue = "<leader>cC", -- Continue most recent session
                             resume = "<leader>cR",   -- Interactive session picker
@@ -270,7 +270,7 @@ return {
         opts = {
             direction = "horizontal",
             size = 20,
-            open_mapping = [[<C-\>]],
+            open_mapping = [[<C-_>]],
             start_in_insert = true,
             terminal_mappings = true,
             persist_mode = true,

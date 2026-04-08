@@ -11,7 +11,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 vim.cmd('syntax enable')
 vim.cmd('filetype plugin indent on')
-
+vim.opt.fileformat = "unix"
 vim.opt.splitright = true
 
 -- folding

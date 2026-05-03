@@ -1,10 +1,13 @@
 local telescope_builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', function() telescope_builtin.find_files({ hidden = true }) end, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', function() telescope_builtin.live_grep({ additional_args = { "--hidden" } }) end, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>ff', function() telescope_builtin.find_files({ hidden = true }) end,
+    { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', function() telescope_builtin.live_grep({ additional_args = { "--hidden" } }) end,
+    { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
 
-vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-P>', function() telescope_builtin.find_files({ hidden = true }) end, { noremap = true, silent = false })
+vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-P>', function() telescope_builtin.find_files({ hidden = true }) end,
+    { noremap = true, silent = false })
 local last_grep_query = ""
 vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-G>', function()
     telescope_builtin.live_grep({
@@ -174,7 +177,7 @@ vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-h>", ":bprev<CR>", { silent = true })
 
 local tidal = require("nvim-tidal")
-vim.keymap.set("n", "<leader>te", function()
+vim.keymap.set({ "i", "n" }, "<M-e>", function()
     tidal.evaluate_block()
 end, { desc = "Tidal Evaluate Block" })
 vim.keymap.set("n", "<leader>ts", function()

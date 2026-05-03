@@ -62,6 +62,14 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "markdown", "text", "gitcommit", "rst" },
+    callback = function()
+        vim.opt_local.spell = true
+        vim.opt_local.spelllang = "en_us,en_gb"
+    end,
+})
+
 
 
 -- disable copilot by default

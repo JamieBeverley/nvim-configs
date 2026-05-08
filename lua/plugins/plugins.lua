@@ -135,6 +135,7 @@ return {
                         {
                             filetype = "NvimTree",
                             text = "Files",
+                            highlight = "NvimTreeNormal",
                             separator = false,
                         },
                     },

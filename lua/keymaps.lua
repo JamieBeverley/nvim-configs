@@ -206,7 +206,7 @@ vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-h>", ":bprev<CR>", { silent = true })
 
 local tidal = require("nvim-tidal")
-vim.keymap.set("n", "<leader>te", function()
+vim.keymap.set({ "i", "n" }, "<M-e>", function()
     tidal.evaluate_block()
 end, { desc = "Tidal Evaluate Block" })
 vim.keymap.set("n", "<leader>ts", function()

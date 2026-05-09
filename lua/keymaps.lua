@@ -1,10 +1,13 @@
 local telescope_builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>ff', function() telescope_builtin.find_files({ hidden = true }) end, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', function() telescope_builtin.live_grep({ additional_args = { "--hidden" } }) end, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>ff', function() telescope_builtin.find_files({ hidden = true }) end,
+    { desc = 'Telescope find files' })
+vim.keymap.set('n', '<leader>fg', function() telescope_builtin.live_grep({ additional_args = { "--hidden" } }) end,
+    { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', telescope_builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telescope help tags' })
 
-vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-P>', function() telescope_builtin.find_files({ hidden = true }) end, { noremap = true, silent = false })
+vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-P>', function() telescope_builtin.find_files({ hidden = true }) end,
+    { noremap = true, silent = false })
 local last_grep_query = ""
 vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-G>', function()
     telescope_builtin.live_grep({
@@ -169,6 +172,35 @@ vim.keymap.set({ 'i', 'n' }, '<C-J>', [[<C-W><C-J>]], { noremap = true, silent =
 vim.keymap.set({ 'i', 'n' }, '<C-K>', [[<C-W><C-K>]], { noremap = true, silent = true })
 vim.keymap.set({ 'i', 'n' }, '<C-L>', [[<C-W><C-L>]], { noremap = true, silent = true })
 
+-- Resize mode: <leader>r to enter, hjkl/arrows to resize, Esc to exit
+-- local function enter_resize_mode()
+--     local step = 3
+--     local resize_keys = {
+--         ['>'] = 'vertical resize +',
+--         ['<lt>'] = 'vertical resize -',
+--         ['+'] = 'resize +',
+--         ['-'] = 'resize -',
+--     }
+--
+--     local function exit_resize_mode()
+--         for key in pairs(resize_keys) do pcall(vim.keymap.del, 'n', key) end
+--         pcall(vim.keymap.del, 'n', '<Esc>')
+--         vim.cmd('echo ""')
+--     end
+--
+--     local msg = { { '-- RESIZE MODE -- (>/< width, +/- height, Esc: exit)', 'ModeMsg' } }
+--     for key, cmd in pairs(resize_keys) do
+--         vim.keymap.set('n', key, function()
+--             vim.cmd(cmd .. step)
+--             vim.api.nvim_echo(msg, false, {})
+--         end, { nowait = true, silent = true })
+--     end
+--     vim.keymap.set('n', '<Esc>', exit_resize_mode, { nowait = true, silent = true })
+--     vim.api.nvim_echo(msg, false, {})
+-- end
+--
+-- vim.keymap.set('n', '<leader>r', enter_resize_mode, { desc = "Enter resize mode" })
+--
 -- shift l/h for tabbing between buffers
 vim.keymap.set("n", "<S-l>", ":bnext<CR>", { silent = true })
 vim.keymap.set("n", "<S-h>", ":bprev<CR>", { silent = true })

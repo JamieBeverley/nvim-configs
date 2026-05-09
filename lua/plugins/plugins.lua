@@ -55,14 +55,14 @@ local claude = {
                     verbose = "--verbose",
                 },
                 window = {
-                    position = "vertical", -- Position of the window: "botright", "topleft", "vertical", "float", etc.
-                    enter_insert = false,         -- Don't auto-enter insert mode when switching to Claude buffer
-                    start_in_normal_mode = true,  -- Prevent force_insert_mode autocmd from overriding enter_insert
+                    position = "vertical",       -- Position of the window: "botright", "topleft", "vertical", "float", etc.
+                    enter_insert = false,        -- Don't auto-enter insert mode when switching to Claude buffer
+                    start_in_normal_mode = true, -- Prevent force_insert_mode autocmd from overriding enter_insert
                 },
                 keymaps = {
                     toggle = {
-                        normal = "<C-\\>",            -- Normal mode keymap for toggling Claude Code, false to disable
-                        terminal = "<C-\\>",          -- Terminal mode keymap for toggling Claude Code, false to disable
+                        normal = "<C-\\>",           -- Normal mode keymap for toggling Claude Code, false to disable
+                        terminal = "<C-\\>",         -- Terminal mode keymap for toggling Claude Code, false to disable
                         variants = {
                             continue = "<leader>cC", -- Continue most recent session
                             resume = "<leader>cR",   -- Interactive session picker
@@ -77,10 +77,19 @@ local claude = {
     end
 }
 
+local resize = {
+    "jamiebeverley/resize-mode.nvim",
+    tag = "v1.0.0",
+    config = function()
+        require("resize-mode").setup()
+    end,
+}
+
 
 return {
     -- open_code,
     claude,
+    resize,
     {
         'davidgranstrom/scnvim',
         ft = 'supercollider',

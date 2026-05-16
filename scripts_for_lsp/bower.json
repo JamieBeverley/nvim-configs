@@ -1,0 +1,8 @@
+{
+    "name": "test",
+    "dependencies": {
+        "purescript-prelude": "^6.0.0",
+        "purescript-effect": "^4.0.0",
+        "purescript-console": "^6.0.0"
+    }
+}

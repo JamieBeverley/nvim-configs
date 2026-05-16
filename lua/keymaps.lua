@@ -130,6 +130,8 @@ vim.keymap.set('n', '<leader>lrf', function()
 vim.keymap.set('n', '<leader>lrn', vim.lsp.buf.rename, { desc = "Rename", noremap = true, silent = false })
 
 vim.keymap.set('n', '<leader>lrr', require('telescope.builtin').resume, { desc = "Resume last Telescope search" })
+vim.keymap.set('n', '<leader>lci', vim.lsp.buf.incoming_calls, { desc = "LSP incoming calls" })
+vim.keymap.set('n', '<leader>lco', vim.lsp.buf.outgoing_calls, { desc = "LSP outgoing calls" })
 
 function _G.set_terminal_keymaps()
     local opts = { buffer = 0 }

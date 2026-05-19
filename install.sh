@@ -28,3 +28,7 @@ npm i -g vscode-langservers-extracted
 ```
 npm i -g purescript-language-server
 ```
+
+# yaml lsp
+npm install -g yaml-language-server
+

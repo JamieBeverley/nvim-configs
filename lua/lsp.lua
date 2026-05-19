@@ -15,6 +15,7 @@ vim.lsp.enable({
     'lua_ls',
     'jsonls',
     'purescriptls',
+    'yamlls',
 })
 
 if os.getenv("JAMIE_USES_RUST") == "TRUE" then

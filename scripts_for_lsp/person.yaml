@@ -1,0 +1,13 @@
+# yaml-languageserver $schema="./person.schema.yaml"
+id: "fdsa"
+thing: 4
+name: Alice Thornton
+email: alice@example.com
+age: 31
+address:
+  street: 12 Maple Street
+  city: Bristol
+  postcode: BS1 4QZ
+tags:
+  - developer
+  - open-source

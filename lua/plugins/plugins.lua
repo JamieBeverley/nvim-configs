@@ -338,6 +338,7 @@ return {
             config = true,
         }
     },
+    { "b0o/schemastore.nvim" },
     -- copilot...
     -- {
     --     "github/copilot.vim"

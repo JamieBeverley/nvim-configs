@@ -83,3 +83,13 @@ if os.getenv("JAMIE_USES_RUST") == "TRUE" then
 end
 
 lspconfig.purescriptls.setup {}
+
+local schemastore = require("schemastore")
+lspconfig.yamlls.setup({
+    settings = {
+        yaml = {
+            schemaStore = { enable = false },
+            schemas = schemastore.yaml.schemas(),
+        },
+    },
+})

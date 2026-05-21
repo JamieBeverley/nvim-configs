@@ -55,6 +55,13 @@ vim.filetype.add({
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+    pattern = "python",
+    callback = function()
+        vim.opt_local.colorcolumn = "79"
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",
     callback = function()
         vim.opt_local.shiftwidth = 2

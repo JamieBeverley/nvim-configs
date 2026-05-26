@@ -5,3 +5,12 @@ Uses lazy for managing...
 - asdf
   - asdf
 
+
+`asdf`
+
+```python
+x = 4
+z = "asdf"
+def something(x:str)->str:
+  return ""
+```

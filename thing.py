@@ -24,3 +24,8 @@ class Person:
 
     def greet(self):
         print(f"Hello, my name is {self.name} and I am {self.age} years old.")
+
+
+x = Person("a", 3)
+
+x.greet()

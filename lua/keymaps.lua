@@ -34,7 +34,16 @@ vim.keymap.set('n', '<leader>yp', function()
     vim.fn.setreg('+', '@' .. rel)
 end, { desc = 'Yank relative file path with @ prefix' })
 
+-- Jump-to diagnostic (lsp errors)
+vim.keymap.set("n", "]d", function()
+    vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Next diagnostic" })
 
+vim.keymap.set("n", "[d", function()
+    vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Previous diagnostic" })
+
+-- toggle tree
 vim.keymap.set('n', '<leader>tree', function()
     vim.fn.feedkeys(':NvimTreeToggle\n', 'n')
 end, { noremap = true, silent = true, desc = "NvimTreeToggle" })

@@ -1,54 +1,34 @@
--- local open_code = {
---     "NickvanDyke/opencode.nvim",
---     dependencies = {
---         -- Recommended for `ask()` and `select()`.
---         -- Required for `snacks` provider.
---         ---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
---         { "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
---     },
---     config = function()
---         ---@type opencode.Opts
---         vim.g.opencode_opts = {
---             -- Your configuration, if any — see `lua/opencode/config.lua`, or "goto definition".
---         }
---
---         -- Required for `opts.events.reload`.
---         vim.o.autoread = true
---
---         -- Recommended/example keymaps.
---         vim.keymap.set({ "n", "x" }, "<C-a>", function() require("opencode").ask("@this: ", { submit = true }) end,
---             { desc = "Ask opencode" })
---         vim.keymap.set({ "n", "x" }, "<C-x>", function() require("opencode").select() end,
---             { desc = "Execute opencode action…" })
---         vim.keymap.set({ "n", "t" }, "<C-t>", function() require("opencode").toggle() end, { desc = "Toggle opencode" })
---
---         vim.keymap.set({ "n", "x" }, "go", function() return require("opencode").operator("@this ") end,
---             { expr = true, desc = "Add range to opencode" })
---         vim.keymap.set("n", "goo", function() return require("opencode").operator("@this ") .. "_" end,
---             { expr = true, desc = "Add line to opencode" })
---
---         vim.keymap.set("n", "<S-C-u>", function() require("opencode").command("session.half.page.up") end,
---             { desc = "opencode half page up" })
---         vim.keymap.set("n", "<S-C-d>", function() require("opencode").command("session.half.page.down") end,
---             { desc = "opencode half page down" })
---
---         -- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
---         vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
---         vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
---     end,
--- }
---
-
 local claude = {
     "greggh/claude-code.nvim",
     dependencies = {
         "nvim-lua/plenary.nvim", -- Required for git operations
     },
     config = function()
+        -- Only these environment variables are passed through to the Claude CLI.
+        -- `env -i` starts from an empty environment; each approved var is re-added
+        -- from the current shell env. Edit this list to allow/deny vars.
+        local allowed_env = {
+            "COLORTERM",
+            "HOME", -- config + credentials location
+            "LANG",
+            "PATH", -- needed to find node / claude / git
+            "SHELL",
+            "SSL_CERT_FILE",
+            "TERM", -- terminal type for rendering
+            "USER",
+        }
+        local env_assignments = {}
+        for _, name in ipairs(allowed_env) do
+            table.insert(env_assignments, string.format('%s="$%s"', name, name))
+        end
+        -- Name each session after the project (git root name, or cwd name outside git repos)
+        local claude_cmd = 'claude --name "$(basename $(git rev-parse --show-toplevel 2>/dev/null || pwd))"'
+        local command = string.format("env -i %s bash -c '%s'",
+            table.concat(env_assignments, " "), claude_cmd)
+
         require("claude-code").setup(
             {
-                -- Name each session after the project (git root name, or cwd name outside git repos)
-                command = "bash -c 'claude --name \"$(basename $(git rev-parse --show-toplevel 2>/dev/null || pwd))\"'",
+                command = command,
                 command_variants = {
                     continue = "--continue",
                     resume = "--resume",

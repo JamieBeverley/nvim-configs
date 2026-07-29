@@ -281,15 +281,26 @@ return {
         { "folke/which-key.nvim" },
         { "sharkdp/fd" },
         {
+            -- the `main` branch is the rewrite; `master` does not support nvim 0.12
             "nvim-treesitter/nvim-treesitter",
-            build = function()
-                require("nvim-treesitter.install").update({ with_sync = true })()
+            branch = "main",
+            lazy = false,
+            build = ":TSUpdate",
+            config = function()
+                require("nvim-treesitter").install({
+                    "javascript", "python", "typescript", "html", "css", "lua",
+                    "markdown", "markdown_inline",
+                })
+                -- `main` no longer enables highlight/indent for you
+                vim.api.nvim_create_autocmd("FileType", {
+                    callback = function(args)
+                        if not pcall(vim.treesitter.start, args.buf) then
+                            return
+                        end
+                        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                    end,
+                })
             end,
-            opts = {
-                ensure_installed = { "javascript", "python", "typescript", "html", "css", "lua" },
-                highlight = { enable = true },
-                indent = { enable = true },
-            }
         },
         {
             "nvim-telescope/telescope.nvim",

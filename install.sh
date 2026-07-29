@@ -6,6 +6,13 @@ pip install pyright black isort
 
 npm install -g typescript typescript-language-server
 
+# install treesitter
+# Either:
+# cargo install tree-sitter-cli
+# or:
+# (older ubuntu couldn't use npm package for this, building w/ rust seemed to work)
+npm i -g tree-sitter-cli
+
 # Install lua language server
 mkdir lua-language-server && cd lua-language-server
 curl -L -o lua-language-server.tar.gz https://github.com/LuaLS/lua-language-server/releases/download/3.15.0/lua-language-server-3.15.0-linux-x64.tar.gz

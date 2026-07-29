@@ -304,7 +304,8 @@ return {
         },
         {
             "nvim-telescope/telescope.nvim",
-            tag = '0.1.8',
+            -- 0.1.8 previewer calls nvim-treesitter master APIs that `main` removed
+            tag = 'v0.2.2',
             dependencies = { 'nvim-lua/plenary.nvim', 'nvim-treesitter/nvim-treesitter', 'sharkdp/fd' }
         },
         { "nvim-tree/nvim-web-devicons", opts = {} },

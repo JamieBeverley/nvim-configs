@@ -8,6 +8,13 @@ null_ls.setup({
 })
 
 -- LSP
+-- nvim-lspconfig ships lsp/pyright.lua with disableTaggedHints = true, which suppresses
+-- the Unnecessary-tagged hints that dim unused variables/imports. Its rtp entry wins the
+-- merge over our own lsp/pyright.lua, so override it here (vim.lsp.config takes priority).
+vim.lsp.config('pyright', {
+    settings = { pyright = { disableTaggedHints = false } },
+})
+
 vim.lsp.enable({
     'pyright',
     'ts_ls',

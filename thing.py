@@ -4,6 +4,7 @@ from functools import lru_cache
 
 @lru_cache
 def ys(thing: str):
+    _not_used = 2
     return thing + 2
 
 

@@ -21,14 +21,20 @@ local claude = {
         for _, name in ipairs(allowed_env) do
             table.insert(env_assignments, string.format('%s="$%s"', name, name))
         end
-        -- Name each session after the project (git root name, or cwd name outside git repos)
-        local claude_cmd = 'claude --name "$(basename $(git rev-parse --show-toplevel 2>/dev/null || pwd))"'
+        -- Name each session after the directory nvim was opened from, plus the
+        -- time the session was opened (evaluated in the shell, so it reflects
+        -- when the terminal actually launched rather than nvim startup)
+        -- local claude_cmd = 'claude --name "$(basename $(pwd))-$(date +%Y%m%d%H%M%S)"'
+        local claude_cmd = 'claude --name "$(basename $(pwd))"'
         local command = string.format("env -i %s bash -c '%s'",
             table.concat(env_assignments, " "), claude_cmd)
 
         require("claude-code").setup(
             {
                 command = command,
+                git = {
+                    use_git_root = false, -- Open Claude in nvim's cwd, not the git repo root
+                },
                 command_variants = {
                     continue = "--continue",
                     resume = "--resume",

@@ -298,12 +298,16 @@ return {
                     "markdown", "markdown_inline",
                 })
                 -- `main` no longer enables highlight/indent for you
+                -- filetypes where nvim's builtin indent script beats the TS queries
+                local builtin_indent = { python = true }
                 vim.api.nvim_create_autocmd("FileType", {
                     callback = function(args)
                         if not pcall(vim.treesitter.start, args.buf) then
                             return
                         end
-                        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                        if not builtin_indent[args.match] then
+                            vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+                        end
                     end,
                 })
             end,

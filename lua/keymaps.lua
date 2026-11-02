@@ -287,3 +287,40 @@ vim.api.nvim_create_autocmd("FileType", {
 -- vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-B>', SwitchToLastNonTerminalBuffer, { noremap = true, silent = false })
 -- vim.keymap.set({'n', 'i', 'v', 'x', 't'}, '<C-T>', SwitchToLastTerminal, { noremap = true, silent = false })
 --
+
+-- <leader>bc "buffer clean": close every file buffer that git doesn't report as
+-- staged or unstaged. Modified, unnamed and special (terminal, help, ...) buffers are kept.
+local function clean_buffers()
+    local root = vim.fn.systemlist('git -C ' .. vim.fn.shellescape(vim.fn.getcwd()) .. ' rev-parse --show-toplevel')
+    if vim.v.shell_error ~= 0 or #root == 0 then
+        vim.notify("bc: not in a git repository", vim.log.levels.WARN)
+        return
+    end
+    root = root[1]
+
+    local keep = {}
+    for _, line in ipairs(vim.fn.systemlist('git -C ' .. vim.fn.shellescape(root) .. ' status --porcelain')) do
+        local path = line:sub(4)
+        -- renames are reported as "old -> new"; keep the destination
+        path = path:match('%s%->%s(.*)$') or path
+        path = path:gsub('^"(.*)"$', '%1')
+        keep[vim.fn.fnamemodify(root .. '/' .. path, ':p')] = true
+    end
+
+    local closed = 0
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        local name = vim.api.nvim_buf_get_name(buf)
+        if vim.api.nvim_buf_is_loaded(buf)
+            and vim.bo[buf].buftype == ''
+            and not vim.bo[buf].modified
+            and name ~= ''
+            and not keep[vim.fn.fnamemodify(name, ':p')]
+        then
+            vim.cmd('bdelete ' .. buf)
+            closed = closed + 1
+        end
+    end
+    vim.notify(string.format("bc: closed %d buffer(s)", closed))
+end
+
+vim.keymap.set('n', '<leader>bc', clean_buffers, { noremap = true, silent = true, desc = "Close buffers not in git status" })

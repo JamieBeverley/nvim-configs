@@ -15,6 +15,19 @@ vim.lsp.config('pyright', {
     settings = { pyright = { disableTaggedHints = false } },
 })
 
+vim.lsp.config('yamlls', {
+    settings = {
+        yaml = {
+            customTags = {
+                "!include scalar",
+                "!include_text scalar",
+                "!include_concat sequence",
+                "!rel_path scalar",
+            },
+        },
+    },
+})
+
 vim.lsp.enable({
     'pyright',
     'ts_ls',

@@ -3,4 +3,5 @@
 -- vim.cmd("colorscheme slate")
 -- vim.cmd("colorscheme habamax")
 -- vim.cmd("colorscheme vim")
+-- vim.cmd("colorscheme morning") -- light
 vim.cmd("colorscheme retrobox")

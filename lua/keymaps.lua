@@ -8,10 +8,23 @@ vim.keymap.set('n', '<leader>fh', telescope_builtin.help_tags, { desc = 'Telesco
 
 vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-P>', function() telescope_builtin.find_files({ hidden = true }) end,
     { noremap = true, silent = false })
+-- rg always searches directories passed explicitly, even if gitignored, so this
+-- surfaces ./worktree-* while still respecting each worktree's own .gitignore
+local function grep_search_dirs()
+    local worktrees = vim.tbl_filter(function(p) return vim.fn.isdirectory(p) == 1 end,
+        vim.fn.glob('worktree-*', false, true))
+    if #worktrees == 0 then
+        return nil
+    end
+    table.insert(worktrees, 1, '.')
+    return worktrees
+end
+
 local last_grep_query = ""
 vim.keymap.set({ 'n', 'i', 'v', 'x', 't' }, '<C-G>', function()
     telescope_builtin.live_grep({
         additional_args = { "--hidden" },
+        search_dirs = grep_search_dirs(),
         default_text = last_grep_query,
         attach_mappings = function(prompt_bufnr, _)
             local action_state = require('telescope.actions.state')
